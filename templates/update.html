@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Update Task</title>
+{% endblock head %}
+
+{% block body %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="text-center">Edit your task</h1>
+        </div>
+        <div class="card-body">
+          <form action="/update/{{task.id}}" method="POST">
+            <div class="form-group">
+              <label for="content">Task:</label>
+              <input type="text" name="content" id="content" class="form-control" value="{{task.content}}" />
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

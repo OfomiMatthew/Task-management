@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Task Management</title>
+{% endblock head %}
+    
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="text-center">Task Management</h1>
+                </div>
+                <div class="card-body">
+                    {% if tasks | length < 1 %}
+                    <h3 class="text-center">No Tasks Available...Create one here</h3>
+                    {% else %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Task</th>
+                                <th>Added</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in tasks %}
+                            <tr>
+                                <td>{{task.content}}</td>
+                                <td>{{task.created.strftime("%Y-%m-%d")}}</td>
+                                <td>
+                                    <a href="/delete/{{task.id}}" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="/update/{{task.id}}" class="btn btn-primary btn-sm">Update</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
+                    <form action="/" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="content" id="content" class="form-control" placeholder="Enter task">
+                        </div>
+                        <button type="submit" class="btn btn-success">Add Task</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
