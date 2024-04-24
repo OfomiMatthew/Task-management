@@ -8,6 +8,7 @@ app = Flask(__name__)
 Scss(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATION"] = False
 db=SQLAlchemy(app)
 
 class MyTask(db.Model):
@@ -18,6 +19,11 @@ class MyTask(db.Model):
 
     def __str__(self):
         return f"Task {self.id}"
+    
+with app.app_context():
+    db.create_all()
+
+  
 
 
 @app.route('/',methods=["POST","GET"])
@@ -70,7 +76,7 @@ def update(id:int):
 
 
 
-if __name__ in '__main__':
-    with app.app_context():
-        db.create_all()
+if __name__ == '__main__':
+    # with app.app_context():
+    #     db.create_all()
     app.run(debug=True)
