@@ -37,6 +37,7 @@
                                 <th>Task Title</th>
                                 <th>Task Content</th>
                                 <th>Added</th>
+                               
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -45,7 +46,9 @@
                             <tr>
                                 <td>{{ task.title }}</td>
                                 <td>{{ task.content }}</td>
+                               
                                 <td class="text-nowrap">{{ task.created.strftime("%Y-%m-%d") }}</td>
+                               
                                 <td>
                                     <a href="/delete/{{ task.id }}" class="btn btn-danger btn-sm">Delete</a>
                                     <a href="/update/{{ task.id }}" class="btn btn-primary btn-sm">Update</a>
@@ -59,6 +62,7 @@
                         <div class="form-group">
                             <input type="text" name="title" id="title" class="form-control" placeholder="Enter title">
                             <textarea name="content" id="content" class="form-control" placeholder="Enter content" rows="4"></textarea>
+                           
 
                         </div>
                         <button type="submit" class="btn btn-success">Add Task</button>

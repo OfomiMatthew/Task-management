@@ -11,7 +11,7 @@ load_dotenv()
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///taskManagerDB.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///taskManager.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATION"] = False
 db=SQLAlchemy(app)
 login_manager = LoginManager(app)
@@ -22,7 +22,7 @@ class MyTask(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     title = db.Column(db.String(100),nullable=False)
     content=db.Column(db.String(500),nullable=False)
-    completed=db.Column(db.Integer,default=0)
+   
     created=db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('tasks', lazy=True))
@@ -92,6 +92,7 @@ def index():
     if request.method=='POST':
         current_task = request.form['content']
         current_task_title = request.form['title']
+        
         new_task = MyTask(content=current_task, title=current_task_title,user_id=current_user.id)
         
         try:
