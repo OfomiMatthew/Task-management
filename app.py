@@ -11,7 +11,7 @@ load_dotenv()
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///taskManager.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///task-Manager.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATION"] = False
 db=SQLAlchemy(app)
 login_manager = LoginManager(app)
